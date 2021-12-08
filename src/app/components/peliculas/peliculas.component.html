@@ -1,1 +1,8 @@
-<p>peliculas works!</p>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col" *ngFor="let pelicula of peliculaArray, let i = index">
+        <div class="card h-100 card-img-top" style="width: 18rem;">
+            <img src="{{pelicula.img }}" class="card-img-top" alt=" {{pelicula.titulo }}" />
+        </div>
+    </div>
+
+</div>

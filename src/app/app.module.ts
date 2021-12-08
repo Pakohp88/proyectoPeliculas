@@ -7,6 +7,9 @@ import { SingupComponent } from './components/singup/singup.component';
 import { LoginComponent } from './components/login/login.component';
 import { PeliculasComponent } from './components/peliculas/peliculas.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuariosService } from './services/usuarios.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,13 +17,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SingupComponent,
     LoginComponent,
     PeliculasComponent,
-    NavbarComponent
+    NavbarComponent    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UsuariosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
