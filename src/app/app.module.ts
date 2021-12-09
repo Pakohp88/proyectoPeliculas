@@ -10,6 +10,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosService } from './services/usuarios.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CarritoComponent } from './components/carrito/carrito.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     SingupComponent,
     LoginComponent,
     PeliculasComponent,
-    NavbarComponent    
+    NavbarComponent,
+    CarritoComponent    
   ],
   imports: [
     BrowserModule,

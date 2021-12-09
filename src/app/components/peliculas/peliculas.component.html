@@ -1,8 +1,15 @@
-<div class="row row-cols-1 row-cols-md-4 g-4">
-    <div class="col" *ngFor="let pelicula of peliculaArray, let i = index">
-        <div class="card h-100 card-img-top" style="width: 18rem;">
-            <img src="{{pelicula.img }}" class="card-img-top" alt=" {{pelicula.titulo }}" />
-        </div>
-    </div>
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let pelicula of peliculaArray">
+            <div class="card col-md-3 shadow-lg">
+                <img src="{{pelicula.img}}" alt="">
+                <h5>{{ pelicula.titulo }} <span class="badge bg-primary"> {{ pelicula.anio}} </span></h5>
 
+                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400ch;">{{ pelicula.sinopsis }}</p>
+                <p><strong>Price:</strong> {{pelicula.precio | currency}}</p>
+                <button class="btn btn-danger bg-gradient" (click)=agregarAlCarrito(pelicula)>Agregar al carrito</button>
+            </div>
+        </ng-container>
+
+    </div>
 </div>

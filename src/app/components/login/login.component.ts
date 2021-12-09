@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +13,11 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   formValid: boolean = true;
+  public usuarios: Array<any> = [];
   
   constructor(private formBuilder: FormBuilder, 
-    private usuarioService: UsuariosService) { }
+              private usuarioService: UsuariosService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({                  
@@ -21,6 +25,8 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });    
     this.listener();    
+    this.usuarioService.usuarios.subscribe( data => { this.usuarios.push(data); });
+     console.log(this.usuarios);
   }
 
   get emailNoValido() {
@@ -37,10 +43,11 @@ export class LoginComponent implements OnInit {
         control.markAsTouched();
       });
     }else{
+        Swal.fire({ allowOutsideClick: false, icon: 'success',  text: 'Espere por favor...', timer: 1600});
+        Swal.showLoading();
+        this.router.navigateByUrl('/peliculas');
         let email = this.form.get('email').value;
-        let password = this.form.get('password').value;        
-        let user = this.usuarioService.login(email, password);      
-        console.log(user);
+        localStorage.setItem('user', email);      
     }
   }
 

@@ -1,0 +1,55 @@
+<div class="row py-5">
+    <ng-container *ngIf="peliculas.length != 0">
+        <div class="col-12">
+            <div class="cart-product">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Portada</th>
+                            <th>Pel&iacute;cula</th>
+                            <th>Sinopsis</th>
+                            <th>Año</th>
+                            <th>Precio unitario</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pelicula of peliculas; let i = index">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ pelicula.titulo }}</td>
+                            <td><img style="width: 120px;" src="{{ pelicula.img }}" alt=""></td>
+                            <td>{{ pelicula.sinopsis }}</td>
+                            <td>{{ pelicula.anio }}</td>
+                            <td style="width: 12%;">{{pelicula.precio | currency}}</td>
+                            <td>
+                                <button (click)="borraraPelicula(pelicula)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><button (click)="vaciarCarrito()" class="btn btn-danger bg-gradient">Vaciar carrito</button></td>
+                            <td><button routerLink="/peliculas" class="btn btn-secondary bg-gradient">Seguir comprando</button></td>
+                            <td><button class="btn btn-success bg-gradient">Comprar</button></td>
+                            <td><strong>Total : {{ precioTotal | currency }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </ng-container>
+    <ng-container *ngIf="peliculas.length == 0">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="card-title">
+                    <h3>Carrito vac&iacute;o</h3>
+                    <i class="fas fa-shopping-cart fa-10x"></i>
+                </div>
+                <button routerLink="/peliculas" class="btn btn-secondary bg-gradient">Comprar pel&iacute;culas</button>
+            </div>
+        </div>
+    </ng-container>
+</div>

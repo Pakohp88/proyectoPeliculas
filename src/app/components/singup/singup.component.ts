@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
+import Swal from 'sweetalert2';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singup',
@@ -14,7 +16,8 @@ export class SingupComponent implements OnInit {
   formValid: boolean = true;
 
   constructor(private formBuilder: FormBuilder, 
-              private usuarioService: UsuariosService) { }
+              private usuarioService: UsuariosService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -49,11 +52,16 @@ export class SingupComponent implements OnInit {
       return Object.values(this.form.controls).forEach(control => {
         control.markAsTouched();
       });
-    }else{
+    }
+    else{
          this.usuario = {id: 0, nombre: this.form.get('nombre').value, apellido: this.form.get('apellido').value,
-                            email: this.form.get('email').value, password: this.form.get('password').value };
-        this.usuarioService.addUsuario(this.usuario);      
-        console.log(this.usuarioService.getUsuarios());
+                            email: this.form.get('email').value, password: this.form.get('password').value };        
+        this.usuarioService.usuarios.emit({ data: this.usuario });
+        Swal.fire({ allowOutsideClick: false, icon: 'success',  text: 'Espere por favor...', timer: 1600});
+        Swal.showLoading();
+        let email = this.form.get('email').value;
+        localStorage.setItem('user', email);
+        this.router.navigateByUrl('/peliculas');
     }
   }
 
