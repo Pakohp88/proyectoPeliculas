@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrito',
@@ -24,10 +25,14 @@ export class CarritoComponent implements OnInit {
 
   borraraPelicula(pelicula: any){
     this.cartService.borraraPelicula(pelicula);
+    Swal.fire({ allowOutsideClick: false, icon: 'success',  text: 'Película eliminda exitosamente', timer: 1600});
+    Swal.showLoading();
   }
 
   vaciarCarrito(){
     this.cartService.borrarCarrito();
+    Swal.fire({ allowOutsideClick: false, icon: 'success',  text: 'Carrito vacío', timer: 1600});
+    Swal.showLoading();
   }
 
 

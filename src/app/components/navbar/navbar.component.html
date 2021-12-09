@@ -12,10 +12,13 @@
             </ul>
 
         </div>
-
-        <button routerLink="carrito" class="btn btn-outline-white">
-            <i style="font-size: 30px;" class="fas fa-shopping-cart"></i>
-            <div style="font-size: 10px;" class="badge bg-secondary">{{ totalPeliculas }}</div>
-        </button>
+        <button routerLink="carrito" class="btn btn-outline-white m-1">
+                <i style="font-size: 15px;" class="fas fa-shopping-cart"></i>
+                <div style="font-size: 10px;" class="badge bg-secondary">{{ totalPeliculas }}</div>
+            </button>
+        <button (click)="logOut()" class="btn btn-outline-white m-1">            
+                <i style="font-size: 15px;" class="fas fa-sign-out-alt"></i>            
+            </button>
     </div>
+
 </nav>

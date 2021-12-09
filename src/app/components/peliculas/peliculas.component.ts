@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PeliculasService } from 'src/app/services/peliculas.service';
 import { Pelicula } from '../../services/peliculas.service';
 import { CartService } from '../../services/cart.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-peliculas',
@@ -21,6 +22,8 @@ export class PeliculasComponent implements OnInit {
 
   agregarAlCarrito(pelicula: any){
     this.carritoService.agregarPelicula(pelicula);
+    Swal.fire({ allowOutsideClick: false, icon: 'success',  text: 'Película agregada al carrito exitosamente', timer: 1600});
+    Swal.showLoading();
   }
 
 }

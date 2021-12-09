@@ -14,6 +14,7 @@ export class SingupComponent implements OnInit {
   usuario: Usuario;
   form: FormGroup;
   formValid: boolean = true;
+  flag = false;
 
   constructor(private formBuilder: FormBuilder, 
               private usuarioService: UsuariosService,
@@ -46,6 +47,10 @@ export class SingupComponent implements OnInit {
     return this.form.get('password').invalid && this.form.get('password').touched;
   }
 
+  lenghtPassword(){    
+    this.flag = this.form.get('password').value.length < 8;
+    console.log(this.flag); 
+  }
 
   registrar(){
     if (this.form.invalid) {

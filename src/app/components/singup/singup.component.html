@@ -1,9 +1,9 @@
-<div class="row">
+<div class="row py-5">
     <div class="columnaCentro">
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <h4>Registro</h4>
+                    <h3>Registro</h3>
                 </div>
                 <form [formGroup]="form" (ngSubmit)="registrar()">
 
@@ -36,8 +36,9 @@
                     <!-- Password input -->
                     <div class="form-group mb-4">
                         <label class="form-label" for="password">Password</label>
-                        <input type="password" id="password" class="form-control bg-light text-black" formControlName="password" [class.is-invalid]="passwordNoValido" />
+                        <input (keypress)="lenghtPassword()" type="password" id="password" class="form-control bg-light text-black" formControlName="password" [class.is-invalid]="passwordNoValido" />
                         <small *ngIf="passwordNoValido" class="text-danger">Ingresa el password</small>
+                        <small *ngIf="flag" class="text-danger">El password debe contener almenos 8 caracteres</small>
                     </div>
 
                     <!-- Submit button -->

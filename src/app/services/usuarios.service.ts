@@ -38,7 +38,7 @@ export class UsuariosService {
 
   autenticado(): boolean{  
 
-    let user = localStorage.getItem('user');
+    let user = localStorage.getItem('user');    
 
     if(user === null){
       return false;
@@ -47,6 +47,10 @@ export class UsuariosService {
       return true;      
     }
     
+  }
+
+  salir(){
+    localStorage.removeItem('user');
   }
 
 

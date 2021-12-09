@@ -9,9 +9,9 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 const routes: Routes = [
   { path: 'singup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'peliculas', component: PeliculasComponent },
-  { path: 'carrito', component: CarritoComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'peliculas'}
+  { path: 'peliculas', component: PeliculasComponent, canActivate: [AuthGuard] },
+  { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard] },
+  { path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 
 @NgModule({

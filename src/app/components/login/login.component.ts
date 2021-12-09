@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   formValid: boolean = true;
+  flag = false;
   public usuarios: Array<any> = [];
   
   constructor(private formBuilder: FormBuilder, 
@@ -25,8 +26,7 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });    
     this.listener();    
-    this.usuarioService.usuarios.subscribe( data => { this.usuarios.push(data); });
-     console.log(this.usuarios);
+    this.usuarioService.usuarios.subscribe( data => { this.usuarios.push(data); });     
   }
 
   get emailNoValido() {
@@ -34,8 +34,14 @@ export class LoginComponent implements OnInit {
   }
 
   get passwordNoValido() {
-    return this.form.get('password').invalid && this.form.get('password').touched;
+    return this.form.get('password').invalid && this.form.get('password').touched ;
   }
+
+  lenghtPassword(){    
+    this.flag = this.form.get('password').value.length < 8;
+    console.log(this.flag); 
+  }
+
 
   login(){
     if (this.form.invalid) {
