@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Usuario } from 'src/app/models/usuario';
+import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,17 +17,16 @@ export class LoginComponent implements OnInit {
   flag = false;
   public usuarios: Array<any> = [];
   
-  constructor(private formBuilder: FormBuilder, 
-              private usuarioService: UsuariosService,
-              private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,        
+              private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({                  
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });    
-    this.listener();    
-    this.usuarioService.usuarios.subscribe( data => { this.usuarios.push(data); });     
+    this.listener();        
   }
 
   get emailNoValido() {
@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   lenghtPassword(){    
-    this.flag = this.form.get('password').value.length < 8;
-    console.log(this.flag); 
+    this.flag = this.form.get('password').value.length < 8;    
   }
 
 
@@ -49,11 +48,25 @@ export class LoginComponent implements OnInit {
         control.markAsTouched();
       });
     }else{
-        Swal.fire({ allowOutsideClick: false, icon: 'success',  text: 'Espere por favor...', timer: 1600});
-        Swal.showLoading();
-        this.router.navigateByUrl('/peliculas');
-        let email = this.form.get('email').value;
-        localStorage.setItem('user', email);      
+
+      let usuario: Usuario  = {  nombre: null, 
+      email: this.form.get('email').value,
+      password: this.form.get('password').value } 
+
+      Swal.fire({ allowOutsideClick: false, icon: 'info',  text: 'Espere por favor...', timer: 1600});
+      Swal.showLoading();
+
+      this.authService.login(usuario).subscribe(
+        resp => {           
+          this.router.navigateByUrl('/peliculas');    
+        },
+        (err) => {           
+          Swal.fire({ allowOutsideClick: false, title: "Error de autenticación" , icon: 'error',  text: err.error.error.message });
+        }
+      );
+
+      
+      //this.router.navigateByUrl('/peliculas');          
     }
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { UsuariosService } from '../../services/usuarios.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   public totalPeliculas : number = 0;
-  public autenticado = false;
+  
 
   constructor(private cartService : CartService,
-              private usuarioService: UsuariosService,
+              private authService: AuthService,
               private router: Router) {
                 
               }
@@ -23,13 +23,13 @@ export class NavbarComponent implements OnInit {
     this.cartService.getPeliculas()
     .subscribe(res=>{
       this.totalPeliculas = res.length;
-    })    
+    })            
   }
 
 
   logOut(){
-    this.totalPeliculas = 0;
-    this.usuarioService.salir();
+    this.totalPeliculas = 0; 
+    this.authService.logout();
     this.router.navigateByUrl('/login')
   }
 

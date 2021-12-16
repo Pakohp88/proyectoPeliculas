@@ -9,20 +9,11 @@
 
                     <input type="hidden" />
 
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="form-label" for="nombre">Nombre</label>
-                                <input type="text" id="nombre" class="form-control bg-light text-black" formControlName="nombre" [class.is-invalid]="nombreNoValido" />
-                                <small *ngIf="nombreNoValido" class="text-danger">Ingresa el nombre</small>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="form-label" for="apellido">Apellido</label>
-                                <input type="text" id="apellido" class="form-control bg-light text-black" formControlName="apellido" [class.is-invalid]="apellidoNoValido" />
-                                <small *ngIf="apellidoNoValido" class="text-danger">Ingresa el apellido</small>
-                            </div>
+                    <div class="row ">
+                        <div class="form-group mb-4">
+                            <label class="form-label" for="nombre">Nombre</label>
+                            <input type="text" id="nombre" class="form-control bg-light text-black" formControlName="nombre" [class.is-invalid]="nombreNoValido" />
+                            <small *ngIf="nombreNoValido" class="text-danger">Ingresa el nombre</small>
                         </div>
                     </div>
 
