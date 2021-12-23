@@ -20,7 +20,7 @@ export class PeliculasComponent implements OnInit {
       this.peliculasService.getPeliculas().subscribe(resp => { this.peliculaArray = resp;  } );
   }
 
-  agregarAlCarrito(pelicula: any){
+  agregarAlCarrito(pelicula: Pelicula){
     this.carritoService.agregarPelicula(pelicula);
     Swal.fire({ allowOutsideClick: false, icon: 'success',  text: 'Película agregada al carrito exitosamente', timer: 1600});
     Swal.showLoading();

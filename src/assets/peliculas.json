@@ -1,4 +1,5 @@
-{
+{	
+
 		"Avatar":{
 		  "id": 1,
 		  "titulo": "Avatar",
@@ -12,11 +13,11 @@
 		},
 		"Iron":{ 
 		  "id": 2,
-		  "titulo": "Iron man",
-		  "director": "",
+		  "titulo": "Avenges infinity war",
+		  "director": "Anthony Russo",
 		  "anio": "2018",
 		  "fechaEstreno": "27 de abril de 2018",
-		  "reparto": " Robert Downey Jr., Chris Hemsworth, Mark Ruffalo, Chris Evans, Scarlett Johansson, Don Cheadle, Benedict Cumberbatch, Tom Holland, Chadwick Boseman, Zoe Saldana, Karen Gillan ,Tom Hiddleston, Paul Bettany, Elizabeth Olsen, Anthony Mackie, Sebastian Stan, Idris Elba, Danai Gurira, Peter Dinklage, Benedict Wong, Pom Klementieff, Dave Bautista, Vin Diesel, Bradley Cooper, Gwyneth Paltrow, Benicio del Toro, Josh Brolin, Chris Pratt",
+		  "reparto": "Robert Downey Jr., Chris Hemsworth, Mark Ruffalo, Chris Evans, Scarlett Johansson, Don Cheadle, Benedict Cumberbatch, Tom Holland, Chadwick Boseman, Zoe Saldana, Karen Gillan ,Tom Hiddleston, Paul Bettany, Elizabeth Olsen, Anthony Mackie, Sebastian Stan, Idris Elba, Danai Gurira, Peter Dinklage, Benedict Wong, Pom Klementieff, Dave Bautista, Vin Diesel, Bradley Cooper, Gwyneth Paltrow, Benicio del Toro, Josh Brolin, Chris Pratt",
 		  "sinopsis":"Los superhéroes se alían para vencer al poderoso Thanos, el peor enemigo al que se han enfrentado. Si Thanos logra reunir las seis gemas del infinito: poder, tiempo, alma, realidad, mente y espacio, nadie podrá detenerlo.",
 		  "img":"/assets/peliculas/avengers.jpg",
 		  "precio": 300
@@ -571,4 +572,5 @@
 		  "img": "/assets/peliculas/soncomoninos.jpg",
 		  "precio": 300
 		}			
+
 }

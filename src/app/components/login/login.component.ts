@@ -14,8 +14,7 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   formValid: boolean = true;
-  flag = false;
-  public usuarios: Array<any> = [];
+  flag = false;  
   
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,        
@@ -63,10 +62,7 @@ export class LoginComponent implements OnInit {
         (err) => {           
           Swal.fire({ allowOutsideClick: false, title: "Error de autenticación" , icon: 'error',  text: err.error.error.message });
         }
-      );
-
-      
-      //this.router.navigateByUrl('/peliculas');          
+      );            
     }
   }
 

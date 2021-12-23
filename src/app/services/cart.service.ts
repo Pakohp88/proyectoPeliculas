@@ -1,27 +1,49 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Pelicula } from './peliculas.service';
+import { Pedido } from '../models/pedido.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  public cartPeliculasList : any =[]
+  public cartPeliculasList : Pelicula[] =[]
   public peliculastList = new BehaviorSubject<any>([]);
+  private URL = 'https://peliculasapp-448a4-default-rtdb.firebaseio.com';  
   
-  constructor() { }
+  
+  constructor(private httpClient: HttpClient) { }
 
+
+  agregarPedido(pedido: Pedido){
+    return this.httpClient.post(`${ this.URL }/pedidos.json`, pedido);
+  }
+  
+  modificarPedido(pedido: Pedido){
+    return this.httpClient.put(`${ this.URL }/pedidos.json`, pedido);
+  }
+
+  obtenerPedidos(){
+    return this.httpClient.get(`${ this.URL }/pedidos.json`)
+  }
+
+  obtenerPedido( id: string ){
+    return this.httpClient.get(`${ this.URL }/pedidos/${ id }.json`);
+  }
+
+
+  borrarPedido( id: string){
+    return this.httpClient.delete(`${ this.URL }/pedidos/${ id }.json`);
+
+  }
 
   getPeliculas(){
     return this.peliculastList.asObservable();
   }
 
-  setProduct(pelicula : any){
-    this.cartPeliculasList.push(...pelicula);
-    this.peliculastList.next(pelicula);
-  }
-
-  agregarPelicula(pelicula : any){
+  agregarPelicula(pelicula : Pelicula){
     this.cartPeliculasList.push(pelicula);
     this.peliculastList.next(this.cartPeliculasList);
     this.getPrecioTotal();    
@@ -35,7 +57,7 @@ export class CartService {
     return Total;
   }
 
-  borraraPelicula(pelicula: any){    
+  borraraPelicula(pelicula: Pelicula){    
     this.cartPeliculasList.map((a:any, index:any)=>{
       if(pelicula.id=== a.id){
         this.cartPeliculasList.splice(index,1);
@@ -49,3 +71,5 @@ export class CartService {
     this.peliculastList.next(this.cartPeliculasList);
   }
 }
+
+

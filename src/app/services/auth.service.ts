@@ -22,7 +22,7 @@ export class AuthService {
     }  
 
     return this.htttpClient.post(`${ this.URL }signInWithPassword?key= ${ this.API_Key }`, authData)
-                           .pipe(map( resp => { this.guardarToken(resp['idToken']); return resp; }));
+                           .pipe(map( resp => { this.guardarToken(resp['localId']); return resp; }));
   }
   
   guardarUsuario(usuario: Usuario){
@@ -32,9 +32,8 @@ export class AuthService {
     }    
 
     return this.htttpClient.post(`${ this.URL }signUp?key= ${ this.API_Key }`, authData)
-                           .pipe(map( resp => { this.guardarToken(resp['idToken']); return resp; }));
-  }
-
+                           .pipe(map( resp => { this.guardarToken(resp['localId']); return resp; }));
+  }  
 
   private guardarToken(idToken: string){
     this.userToken = idToken;
@@ -55,12 +54,7 @@ export class AuthService {
     return this.userToken;
   }
 
-
   estaAutenticado(): boolean{
-
-    if(this.userToken.length < 2){
-      return false;
-    }   
 
     let expira = Number( localStorage.getItem('expira') );
     const expiraDate = new Date();
@@ -73,7 +67,6 @@ export class AuthService {
       return false;      
     }
   }
-
 
   logout(){
     localStorage.removeItem('token');
