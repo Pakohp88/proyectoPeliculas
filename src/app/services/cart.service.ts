@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Pelicula } from './peliculas.service';
 import { Pedido } from '../models/pedido.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class CartService {
   }
 
   obtenerPedidos(){
-    return this.httpClient.get(`${ this.URL }/pedidos.json`)
+    return this.httpClient.get(`${ this.URL }/pedidos.json`).pipe(map( this.arreglo ));
   }
 
   obtenerPedido( id: string ){
@@ -70,6 +71,16 @@ export class CartService {
     this.cartPeliculasList = []
     this.peliculastList.next(this.cartPeliculasList);
   }
+
+  private arreglo(pedidosObj: object){
+    const pedidos: Pedido[] = [];    
+     Object.keys( pedidosObj ).forEach(
+       key => { 
+         const pedido: Pedido = pedidosObj[key]        
+         pedidos.push(pedido);
+       });
+       return pedidos;
+   } 
 }
 
 

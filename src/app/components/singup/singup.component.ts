@@ -54,7 +54,7 @@ export class SingupComponent implements OnInit {
     else{
       let usuario: Usuario = {
         nombre: this.form.get('nombre').value,
-        email: this.form.get('email').value,
+        email: this.form.get('email').value,        
         password: this.form.get('password').value
       };
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,14 @@ export class AuthService {
 
   URL = 'https://identitytoolkit.googleapis.com/v1/accounts:';  
   API_Key = 'AIzaSyBBH6ARH2jiOOsA6NIBHqxxCbFxfVQverE';
-  userToken: string;
+  userToken: string;  
+  public admin: boolean = false;
 
-  constructor(private htttpClient: HttpClient) { }
-
+  constructor(private htttpClient: HttpClient) { } 
 
   login(usuario: Usuario){
+          
+    this.admin = usuario.rol;
     const authData = {
       ... usuario,
       returnSecureToken: true
@@ -55,10 +58,9 @@ export class AuthService {
   }
 
   estaAutenticado(): boolean{
-
     let expira = Number( localStorage.getItem('expira') );
     const expiraDate = new Date();
-    expiraDate.setTime( expira );
+    expiraDate.setTime( expira );        
 
     if(expiraDate > new Date()){
       return true;
@@ -67,6 +69,11 @@ export class AuthService {
       return false;      
     }
   }
+
+  esAdmin(): boolean{
+    return this.admin;
+  }
+
 
   logout(){
     localStorage.removeItem('token');

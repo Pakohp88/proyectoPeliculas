@@ -23,8 +23,19 @@
                     </div>
 
                     <div class="form-group mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="adminType" value="false" formControlName="rol" />
+                            <label class="form-check-label" for="adminType">
+                              Iniciar sesi&oacute;n como administrador
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
                         <a class="nav-link text-white" [routerLink]="['/singup']">Registrar nuevo usuario</a>
                     </div>
+
+
 
 
                     <!-- Submit button -->

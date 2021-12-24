@@ -11,6 +11,7 @@ import { PeliculasComponent } from './components/peliculas/peliculas.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { AuthService } from './services/auth.service';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AuthService } from './services/auth.service';
     LoginComponent,
     PeliculasComponent,
     NavbarComponent,
-    CarritoComponent    
+    CarritoComponent,
+    AdminComponent    
   ],
   imports: [
     BrowserModule,

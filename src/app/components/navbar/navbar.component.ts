@@ -11,26 +11,23 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent implements OnInit {
 
   public totalPeliculas : number = 0;
+  public flag: boolean;
   
 
   constructor(private cartService : CartService,
-              private authService: AuthService,
-              private router: Router) {
-                
-              }
+              public authService: AuthService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.cartService.getPeliculas()
     .subscribe(res=>{
-      this.totalPeliculas = res.length;
-    })            
+      this.totalPeliculas = res.length;      
+    });        
   }
 
-
   logOut(){
-    this.totalPeliculas = 0; 
+    this.cartService.borrarCarrito();
     this.authService.logout();
     this.router.navigateByUrl('/login')
   }
-
 }

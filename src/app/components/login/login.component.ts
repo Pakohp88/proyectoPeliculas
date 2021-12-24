@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({                  
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      rol: false
     });    
     this.listener();        
   }
@@ -46,23 +47,23 @@ export class LoginComponent implements OnInit {
       return Object.values(this.form.controls).forEach(control => {
         control.markAsTouched();
       });
-    }else{
-
+    }else{      
       let usuario: Usuario  = {  nombre: null, 
       email: this.form.get('email').value,
+      rol: this.form.get('rol').value,
       password: this.form.get('password').value } 
 
       Swal.fire({ allowOutsideClick: false, icon: 'info',  text: 'Espere por favor...', timer: 1600});
       Swal.showLoading();
 
       this.authService.login(usuario).subscribe(
-        resp => {           
+        resp => {          
           this.router.navigateByUrl('/peliculas');    
         },
         (err) => {           
           Swal.fire({ allowOutsideClick: false, title: "Error de autenticación" , icon: 'error',  text: err.error.error.message });
         }
-      );            
+      ); 
     }
   }
 

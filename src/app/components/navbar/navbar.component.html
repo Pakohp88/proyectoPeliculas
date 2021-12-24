@@ -2,25 +2,29 @@
     <div class="container-fluid">
         <a class="navbar-brand text-white" [routerLink]="['/peliculas']">Movie on pel&iacute;culas</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ng-container *ngIf="authService.estaAutenticado()">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" aria-current="page" [routerLink]="['/peliculas']">Cat&aacute;logo</a>
+                    </li>
+                    <li class="nav-item" *ngIf="authService.esAdmin()">
+                        <a class="nav-link text-white" aria-current="page" [routerLink]="['/admin']">Admin</a>
+                    </li>
+                </ul>
 
+            </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item ">
-                    <a class="nav-link text-white" aria-current="page" [routerLink]="['/peliculas']">Cat&aacute;logo</a>
-                </li>
-            </ul>
-
-        </div>
-        <button routerLink="carrito" class="btn btn-outline-white m-1">
+            <button routerLink="carrito" class="btn btn-outline-white m-1">
                 <i style="font-size: 15px;" class="fas fa-shopping-cart"></i>
                 <div style="font-size: 10px;" class="badge bg-secondary">{{ totalPeliculas }}</div>
             </button>
-        <button (click)="logOut()" class="btn btn-outline-white m-1">
+            <button (click)="logOut()" class="btn btn-outline-white m-1">
                 <i style="font-size: 15px;" class="fas fa-sign-out-alt"></i>
             </button>
+        </ng-container>
 
     </div>
 
